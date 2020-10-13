@@ -1,7 +1,7 @@
 version: "3.7"
 services:
     app:
-        image: ip_rejector_app:${application_tag}
+        image: bamboo:${application_tag}
         build:
             context: application
             args:
