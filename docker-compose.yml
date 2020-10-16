@@ -6,6 +6,8 @@ services:
             context: application
             args:
                 PythonVersion: ${python_version}
+        environment:
+            ENV: ${execution_env}
         volumes:
             - "./application/:${container_mountpoint_application}"
             - "./test/:/var/test"
