@@ -18,20 +18,15 @@ DUPLICATING_DATA_LIST = [
 
 @pytest.fixture()
 def instance():
-    instance = ReadCountryIP('test')
+    instance = ReadCountryIP()
     return instance
 
 
-@pytest.fixture()
-def instance2():
-    instance2 = ReadCountryIP('test2')
-    return instance2
-
-
-def test_read_file(instance, instance2):
-    assert instance.read_file() == DATA_LIST
+def test_read_file(instance):
+    assert instance.read_file('test1') == DATA_LIST
+    assert instance.read_file('test2') == DATA_LIST
     with pytest.raises(FileNotFoundError):
-        raise FileNotFoundError
+        instance.read_file('not_exist')
 
 
 def test_remove_duplicate(instance):
