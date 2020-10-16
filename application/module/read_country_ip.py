@@ -1,8 +1,8 @@
 from os import getenv
+import re
 
 TEST_PATH = './../test/module_test/ipv4/'
 PROD_PATH = './ipv4/'
-READ_START = 6
 
 
 class ReadCountryIP():
@@ -24,7 +24,14 @@ class ReadCountryIP():
     def read_file(self):
         try:
             with open(self.path) as f:
-                l_strip = [s.strip() for s in f.readlines()[READ_START:]]
+                match_pattern = r'^\s*(#.*|)$'
+                line = f.readline()
+                l_strip = []
+                while line:
+                    match = re.match(match_pattern, line)
+                    if not match:
+                        l_strip.append(line.rstrip())
+                    line = f.readline()
                 l_ip = self.remove_duplicate(l_strip)
                 return l_ip
         except FileNotFoundError:
