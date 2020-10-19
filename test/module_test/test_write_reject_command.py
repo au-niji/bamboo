@@ -17,6 +17,7 @@ def instance():
     instance = WriteRejectCommand()
     return instance
 
+
 # 253個のデータを配列として読み込む
 @pytest.fixture()
 def data():
@@ -27,7 +28,7 @@ def data():
 
 def test_make_command(instance):
     assert instance.make_command(country='test1', i=0, l_split_ip=DATA_LIST) == \
-'gcloud compute firewall-rules create foreign-reject-test1-000 \
+        'gcloud compute firewall-rules create foreign-reject-test1-000 \
 --action=DENY --rules=ALL --priority=100 --source-ranges=\
 1.0.1.0/24,1.0.2.0/23,1.0.8.0/21'
 
@@ -45,12 +46,12 @@ def test_write_file(instance, data):
     # ファイルが既に存在していたら削除
     if os.path.exists(path):
         os.remove(path)
-    assert os.path.exists(path) == False
+    assert os.path.exists(path) is False
     instance.write_file(data, country='test3')
-    assert os.path.exists(path) == True
+    assert os.path.exists(path) is True
     # 書き込まれたファイルの中身を確認
     with open(path) as f:
         assert f.readlines()[1] == \
-'gcloud compute firewall-rules create foreign-reject-test3-001 \
+            'gcloud compute firewall-rules create foreign-reject-test3-001 \
 --action=DENY --rules=ALL --priority=100 --source-ranges=\
 43.225.140.0/22,43.225.172.0/22,43.225.180.0/22\n'
