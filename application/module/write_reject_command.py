@@ -32,7 +32,7 @@ class WriteRejectCommand():
     # 特定のファイルに書き込む
     def write_file(self, l_ip, country):
         l_split_ip = list(self.split_list(l_ip, SPLIT_NUM))
-        with open(self.path, mode='w') as f:
+        with open(self.path, mode='a') as f:
             for split_i in range(len(l_split_ip)):
                 write_command = self.make_command(country, split_i, l_split_ip[split_i])
                 f.writelines(write_command + '\n')
