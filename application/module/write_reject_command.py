@@ -1,8 +1,6 @@
 from os import getenv
 
 
-TEST_PATH = './../test/module_test/reject/reject_by_country.gcsh_'
-PROD_PATH = './reject/reject_by_country.gcsh_'
 BEGINNING_COMMAND = 'gcloud compute firewall-rules create foreign-reject-'
 INTERMEDIATE_COMMAND = ' --action=DENY --rules=ALL --priority=100 --source-ranges='
 SPLIT_NUM = 250
@@ -10,13 +8,8 @@ SPLIT_NUM = 250
 
 class WriteRejectCommand():
     def __init__(self):
-        env = getenv('ENV')
-        if env == 'DEV' or env == 'test':
-            self.path = TEST_PATH
-        elif env == 'PROD':
-            self.path = PROD_PATH
-        else:
-            raise EnvironmentError('モードが正しくありません。 ENV:{}'.format(env))
+        reject_folder_path = getenv('REJECT_FOLDER_PATH')
+        self.path = reject_folder_path
 
     # 冒頭のコマンドを作る
     def make_command(self, country, i, l_split_ip):

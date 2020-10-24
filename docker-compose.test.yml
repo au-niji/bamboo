@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+    app:
+        environment:
+            ENV: test
+            REJECT_FOLDER_PATH: './../test/module_test/reject/reject_by_country.gcsh_'
+            IPv4_FOLDER_PATH: './../test/module_test/ipv4/'
+        stdin_open: true
+        tty: true
+        command: pytest ${TEST_FILE}
