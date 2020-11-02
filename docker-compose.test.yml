@@ -7,4 +7,4 @@ services:
             IPv4_FOLDER_PATH: './../test/module_test/ipv4/'
         stdin_open: true
         tty: true
-        command: pytest ${TEST_FILE}
+        command: pytest -v ${TEST_FILE}
