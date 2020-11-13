@@ -1,4 +1,5 @@
 import pytest
+import os
 
 from module.read_country_ip import ReadCountryIP
 
@@ -14,11 +15,11 @@ DUPLICATING_DATA_LIST = [
     '1.0.2.0/23',
     '1.0.8.0/21'
 ]
-
+ipv4_folder_path = os.getenv('IPv4_FOLDER_PATH')
 
 @pytest.fixture()
 def instance():
-    instance = ReadCountryIP()
+    instance = ReadCountryIP(ipv4_folder_path)
     return instance
 
 

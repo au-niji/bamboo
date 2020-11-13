@@ -6,10 +6,14 @@ services:
             context: application
             args:
                 PythonVersion: ${python_version}
-        environment:
-            ENV: ${execution_env}
         volumes:
             - "./application/:${container_mountpoint_application}"
+            - "./output/:/var/output"
             - "./test/:/var/test"
+        environment:
+            REJECT_OUTPUT_FOLDER_PATH: './../output/'
+            IPv4_FOLDER_PATH: './ipv4/'
+            REJECT_FILE_NAME: 'reject_by_country.gcsh'
         stdin_open: true
         tty: true
+        command: python app.py

@@ -1,19 +1,10 @@
 from os import getenv
 import re
 
-TEST_PATH = './../test/module_test/ipv4/'
-PROD_PATH = './ipv4/'
-
 
 class ReadCountryIP():
-    def __init__(self):
-        env = getenv('ENV')
-        if env == 'DEV' or env == 'test':
-            self.path = TEST_PATH
-        elif env == 'PROD':
-            self.path = PROD_PATH
-        else:
-            raise EnvironmentError('モードが正しくありません。 ENV:{}'.format(env))
+    def __init__(self, ipv4_folder_path):
+        self.path = ipv4_folder_path
 
     # 同じIP address があった場合削除する
     def remove_duplicate(self, l_ip):

@@ -141,5 +141,5 @@ cython_debug/
 .DS_Store
 
 # reject
-application/reject/reject_by_country.gcsh_
-test/module_test/reject/reject_by_country.gcsh_
+output/reject_by_country.gcsh
+test/module_test/output/reject_by_country.gcsh
