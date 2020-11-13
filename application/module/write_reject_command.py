@@ -1,15 +1,11 @@
-from os import getenv
-
-
 BEGINNING_COMMAND = 'gcloud compute firewall-rules create foreign-reject-'
 INTERMEDIATE_COMMAND = ' --action=DENY --rules=ALL --priority=100 --source-ranges='
 SPLIT_NUM = 250
 
 
 class WriteRejectCommand():
-    def __init__(self):
-        reject_folder_path = getenv('REJECT_FOLDER_PATH')
-        self.path = reject_folder_path
+    def __init__(self, reject_file_path):
+        self.path = reject_file_path
 
     # 冒頭のコマンドを作る
     def make_command(self, country, i, l_split_ip):

@@ -4,22 +4,20 @@ from os import (getenv, path, remove)
 from module.read_country_ip import ReadCountryIP
 from module.write_reject_command import WriteRejectCommand
 
+ipv4_folder_path = getenv('IPv4_FOLDER_PATH')
+reject_folder_path = getenv('REJECT_FOLDER_PATH')
+reject_file_name = getenv('REJECT_FILE_NAME')
+reject_file_path = str(reject_folder_path) + str(reject_file_name)
+country_folder_path = str(ipv4_folder_path)
 
-COUNTRY_FILE_PATH = './ipv4/'
-REJECT_FILE_PATH = './reject/reject_by_country.gcsh_'
-TEST_COUNTRY_FILE_PATH = './../test/module_test/ipv4'
-TEST_REJECT_FILE_PATH = './../test/module_test/reject/reject_by_country.gcsh_'
-
-read_country_ip = ReadCountryIP()
-write_rejcet_command = WriteRejectCommand()
+read_country_ip = ReadCountryIP(country_folder_path)
+write_rejcet_command = WriteRejectCommand(reject_file_path)
 
 
 class App():
     def __init__(self):
-        ipv4_folder_path = getenv('IPv4_FOLDER_PATH')
-        reject_folder_path = getenv('REJECT_FOLDER_PATH')
-        self.country_directory_path = ipv4_folder_path
-        self.reject_file_path = reject_folder_path
+        self.country_directory_path = str(ipv4_folder_path)
+        self.reject_file_full_path = reject_file_path
 
     # 国別ファイルの名前を取得
     def fetch_country_name(self):
@@ -31,8 +29,8 @@ class App():
 
     # rejectファイルが存在していたら削除
     def remove_reject_file(self):
-        if path.exists(self.reject_file_path):
-            remove(self.reject_file_path)
+        if path.exists(self.reject_file_full_path):
+            remove(self.reject_file_full_path)
 
     def main(self):
         self.remove_reject_file()

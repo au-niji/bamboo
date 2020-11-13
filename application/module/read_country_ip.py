@@ -3,8 +3,7 @@ import re
 
 
 class ReadCountryIP():
-    def __init__(self):
-        ipv4_folder_path = getenv('IPv4_FOLDER_PATH')
+    def __init__(self, ipv4_folder_path):
         self.path = ipv4_folder_path
 
     # 同じIP address があった場合削除する

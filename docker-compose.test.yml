@@ -3,8 +3,9 @@ services:
     app:
         environment:
             ENV: test
-            REJECT_FOLDER_PATH: './../test/module_test/reject/reject_by_country.gcsh_'
+            REJECT_FOLDER_PATH: './../test/module_test/reject/'
             IPv4_FOLDER_PATH: './../test/module_test/ipv4/'
+            REJECT_FILE_NAME: 'reject_by_country.gcsh'
         stdin_open: true
         tty: true
         command: pytest -v ${TEST_FILE}

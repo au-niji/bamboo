@@ -1,10 +1,8 @@
 import pytest
-import os
+from os import getenv, path
 import pathlib
 
 from app import App
-
-TEST_REJECT_FILE_PATH = './../test/module_test/reject/reject_by_country.gcsh_'
 
 
 @pytest.fixture()
@@ -14,11 +12,19 @@ def instance():
 
 
 @pytest.fixture()
-def make_reject_file():
-    if os.path.exists(TEST_REJECT_FILE_PATH):
+def reject_file_path():
+    reject_folder_path = getenv('REJECT_FOLDER_PATH')
+    reject_file_name = getenv('REJECT_FILE_NAME')
+    reject_file_full_path = str(reject_folder_path) + str(reject_file_name)
+    return reject_file_full_path
+
+
+@pytest.fixture()
+def make_reject_file(reject_file_path):
+    if path.exists(reject_file_path):
         pass
     else:
-        pathlib.Path(TEST_REJECT_FILE_PATH).touch()
+        pathlib.Path(reject_file_path).touch()
 
 
 def test_fetch_country_name(instance):
@@ -26,20 +32,20 @@ def test_fetch_country_name(instance):
 
 
 # 関数を実行し、ファイルを削除した後に存在を確認する
-def test_remove_reject_file(instance):
+def test_remove_reject_file(instance, reject_file_path, make_reject_file):
     # ファイルが存在したら削除する
-    if os.path.exists(TEST_REJECT_FILE_PATH):
+    if path.exists(reject_file_path):
         pass
     else:
-        pathlib.Path(TEST_REJECT_FILE_PATH).touch()
-    assert os.path.exists(TEST_REJECT_FILE_PATH) is True
+        pathlib.Path(reject_file_path).touch()
+    assert path.exists(reject_file_path) is True
     instance.remove_reject_file()
-    assert os.path.exists(TEST_REJECT_FILE_PATH) is False
+    assert path.exists(reject_file_path) is False
 
 
-def test_main(instance):
+def test_main(instance, reject_file_path):
     instance.main()
-    with open(TEST_REJECT_FILE_PATH) as f:
+    with open(reject_file_path) as f:
         line = f.readline()
     assert line == \
         'gcloud compute firewall-rules create foreign-reject-test1-000 \
