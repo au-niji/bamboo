@@ -13,7 +13,7 @@ def instance():
 
 @pytest.fixture()
 def reject_file_path():
-    reject_folder_path = getenv('REJECT_FOLDER_PATH')
+    reject_folder_path = getenv('REJECT_OUTPUT_FOLDER_PATH')
     reject_file_name = getenv('REJECT_FILE_NAME')
     reject_file_full_path = str(reject_folder_path) + str(reject_file_name)
     return reject_file_full_path

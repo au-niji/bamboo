@@ -10,7 +10,7 @@ services:
             - "./application/:${container_mountpoint_application}"
             - "./test/:/var/test"
         environment:
-            REJECT_FOLDER_PATH: './reject/'
+            REJECT_OUTPUT_FOLDER_PATH: './output/'
             IPv4_FOLDER_PATH: './ipv4/'
             REJECT_FILE_NAME: 'reject_by_country.gcsh'
         stdin_open: true

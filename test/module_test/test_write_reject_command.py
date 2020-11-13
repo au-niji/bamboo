@@ -11,7 +11,7 @@ DATA_LIST = [
 ]
 
 ipv4_folder_path = os.getenv('IPv4_FOLDER_PATH')
-reject_folder_path = os.getenv('REJECT_FOLDER_PATH')
+reject_folder_path = os.getenv('REJECT_OUTPUT_FOLDER_PATH')
 reject_file_name = os.getenv('REJECT_FILE_NAME')
 reject_file_path = str(reject_folder_path) + str(reject_file_name)
 ipv4_folder_path = os.getenv('IPv4_FOLDER_PATH')

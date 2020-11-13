@@ -5,7 +5,7 @@ from module.read_country_ip import ReadCountryIP
 from module.write_reject_command import WriteRejectCommand
 
 ipv4_folder_path = getenv('IPv4_FOLDER_PATH')
-reject_folder_path = getenv('REJECT_FOLDER_PATH')
+reject_folder_path = getenv('REJECT_OUTPUT_FOLDER_PATH')
 reject_file_name = getenv('REJECT_FILE_NAME')
 reject_file_path = str(reject_folder_path) + str(reject_file_name)
 country_folder_path = str(ipv4_folder_path)
